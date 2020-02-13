@@ -1,6 +1,7 @@
 html,
 body {
-    background-image: url('/img/198417.jpg');
+    background-color: transparent;
+    background-image: url('/img/image.jpg');
     background-repeat: no-repeat;
 }
 

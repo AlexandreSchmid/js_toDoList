@@ -5,7 +5,7 @@ var textValue = document.getElementById('textValue').value
 
 addToDo.addEventListener("click", function() {
     var li = document.createElement('li')
-    var a = document.createElement('button')
+    var button = document.createElement('button')
     todo.push(textValue)
     li.setAttribute('class', 'list-group-item')
     li.innerHTML = textValue
@@ -16,6 +16,8 @@ addToDo.addEventListener("click", function() {
     ul.prepend(li)
 })
 
-document.getElementById('thisButton').addEventListener("click", function() {
-    this.parentNode.remove
+document.querySelector('li').addEventListener("click", function() {
+    if (document.querySelector('li > #thisButton')) {
+        this.parentNode.remove()
+    }
 })

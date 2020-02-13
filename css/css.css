@@ -1,15 +1,16 @@
 html,
 body {
     background-color: transparent;
-    background-image: url('/img/image.jpg');
+    background-image: url('/home/alexandre/Documents/github/js_toDoList/img/image.jpg');
+    filter: alpha(opacity=50);
+    opacity: 0.5;
     background-repeat: no-repeat;
 }
 
 .container {
     width: 50%;
-    margin: auto;
     padding: 5em;
-    background: transparent;
+    border-radius: 10px;
 }
 
 .form-group {

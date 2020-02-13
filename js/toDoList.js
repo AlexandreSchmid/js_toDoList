@@ -3,30 +3,19 @@ var addToDo = document.getElementById('addToDo')
 var ul = document.getElementById('ul')
 var textValue = document.getElementById('textValue').value
 
-
 addToDo.addEventListener("click", function() {
     var li = document.createElement('li')
-    var button = document.createElement('button')
-
-
+    var a = document.createElement('button')
     todo.push(textValue)
-
     li.setAttribute('class', 'list-group-item')
     li.innerHTML = textValue
-    button.setAttribute('class', 'btn btn-outline-danger')
+    button.setAttribute('class', 'badge badge-danger')
     button.setAttribute('id', 'thisButton')
-    button.innerHTML = 'X'
-    ul.prepend(li, button)
+    button.innerHTML = 'Remove'
+    li.appendChild(button)
+    ul.prepend(li)
 })
 
-function removeElement() {
-    try {
-        document.getElementById('thisButton').addEventListener("click", function() {
-            this.parentElement.remove()
-        })
-    } catch (TypeError) {
-
-    }
-
-}
-removeElement()
+document.getElementById('thisButton').addEventListener("click", function() {
+    this.parentNode.remove
+})

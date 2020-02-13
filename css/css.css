@@ -1,0 +1,12 @@
+html,
+body {
+    background-image: url("/img/198417.jpg");
+}
+
+.container {
+    width: 600px;
+}
+
+.form-group {
+    display: inline;
+}

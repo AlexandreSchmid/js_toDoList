@@ -1,10 +1,20 @@
-var images = []
-var url = function() {
-    var url = new URL("https://wallpaperaccess.com/landscape-photography")
-    var parseUrl = url.searchParams.get("class");
+var addToDo = document.querySelector('form')
+var textValue = document.getElementById('textValue').nodeValue
 
-    https: //wallpaperaccess.com/download/landscape-photography-198417
-        console.log(parseUrl)
-}
-
-url()
+addToDo.addEventListener("submit", function(textValue) {
+    console.dir(textValue)
+    var todo = []
+    var ul = document.createElement('ul')
+    var li = document.createElement('li')
+    var button = document.createElement('button')
+    var todoPlace = document.getElementById('toDoPlace')
+    ul.setAttribute('class', 'list-group')
+    li.setAttribute('class', 'list-group-item')
+    li.textContent = textValue
+    button.setAttribute('value', 'X')
+    button.setAttribute('class', 'btn btn-outline-danger')
+    todo.push(textValue)
+    ul.appendChild(li)
+    ul.appendChild(button)
+    todoPlace.append(ul)
+})

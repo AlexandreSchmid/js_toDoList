@@ -21,6 +21,14 @@ body {
     color: darkblue;
 }
 
-li {
-    text-align: right;
+ul .list-group-item {
+    text-align: left;
+}
+
+ul .list-group-item p {
+    display: inline;
+}
+
+ul .list-group-item button {
+    float: right;
 }

@@ -1,26 +1,41 @@
-// Variables select the html elements
-var todo = [] // For later, will contain the other todos
-var addToDo = document.getElementById('addToDo')
-var ul = document.getElementById('ul')
-var textValue = document.getElementById('textValue').value
+class Todolist {
+    constructor(todo, ul, textValue) {
+        this.todo = todo
+        this.ul = ul
+        this.textValue = textValue
+    }
+
+    createTask() {
+        // Create elements for html structure
+        var elt = [
+            document.createElement('li'),
+            document.createElement('p'),
+            document.createElement('button'),
+            document.createTextNode(this.textValue.value)
+        ]
+        this.todo.push(this.textValue.value) // Push into array (see below)
+
+        // Set attributes like class for css
+        elt[0].setAttribute('class', 'list-group-item')
+        elt[2].setAttribute('class', 'badge badge-danger')
+        elt[2].innerHTML = 'Remove'
+            // Append button into ul child and add all new node to the top of the list
+        elt[1].appendChild(elt[3])
+        elt[0].appendChild(elt[1])
+        elt[0].appendChild(elt[2])
+        this.ul.prepend(elt[0])
+
+        localStorage.setItem('todoList', this.todo.join(''))
+
+    }
+}
 
 // Triggered by a click on 'Add' button
-addToDo.addEventListener("click", function() {
-        todo.push(textValue) // Push into array (see below)
-            // Create elements for html structure
-        var li = document.createElement('li')
-        var button = document.createElement('button')
-        var textNode = document.createTextNode(textValue)
-            // Set attributes like class for css
-        li.setAttribute('class', 'list-group-item')
-        li.appendChild(textNode)
-        button.setAttribute('class', 'badge badge-danger')
-        button.innerHTML = 'Remove'
-            // Append button into ul child and add all new node to the top of the list
-        li.appendChild(button)
-        ul.prepend(li)
+document.getElementById('addToDo').addEventListener("click", function() {
+    // Call to Todolist class function createTask()
+    new Todolist([], document.getElementById('ul'), document.getElementById('textValue')).createTask()
+        // When clicking on remove
+    document.querySelector('.badge').addEventListener("click", function() {
+        ul.removeChild(ul.children.item(this.id))
     })
-    // When clicking on remove
-document.querySelector('ul').addEventListener("click", function() {
-    ul.removeChild(ul.children.item(this.id))
 })

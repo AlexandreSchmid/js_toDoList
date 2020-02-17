@@ -5,17 +5,13 @@ class Todolist {
         this.textValue = textValue
     }
 
-    loadTasks() {
-
-    }
-
     createTask() {
         // Create elements for html structure
         var elt = []
         for (var i = 0; i < this.elts.length; i++) {
             elt.push(document.createElement(this.elts[i]))
         }
-        elt.push(document.createTextNode(this.textValue.value))
+        elt.push(document.createTextNode(this.textValue))
 
         // Set attributes like class for css
         elt[0].setAttribute('class', 'list-group-item')
@@ -27,10 +23,10 @@ class Todolist {
         elt[0].appendChild(elt[2])
         this.ul.prepend(elt[0])
 
-        this.saveItems()
+        this.saveTasks()
     }
 
-    saveItems() {
+    saveTasks() {
         var tasks = []
         var items = document.querySelectorAll('li')
         for (var i = 0; i < items.length; i++) {
@@ -40,13 +36,21 @@ class Todolist {
     }
 }
 
+window.addEventListener('load', function(e) {
+    if (localStorage.getItem('todoList') != null) {
+        var items = localStorage.getItem('todoList').split(',')
+        for (var i = 0; i < items.length; i++) {
+            new Todolist(['li', 'p', 'button'], document.getElementById('ul'), items[i]).createTask()
+        }
+    }
+})
+
 // Triggered by a click on 'Add' button
 document.getElementById('addToDo').addEventListener("click", function() {
     // Call to Todolist class function createTask()
-    new Todolist(['li', 'p', 'button'], document.getElementById('ul'), document.getElementById('textValue')).createTask()
+    new Todolist(['li', 'p', 'button'], document.getElementById('ul'), document.getElementById('textValue').value).createTask()
         // When clicking on remove
     document.querySelector('.badge').addEventListener("click", function() {
-        document.getElementById('ul').removeChild(document.getElementById('ul').children.item(this.id))
-        new Todolist(null, null, null).saveItems()
+        ul.removeChild(ul.children.item(this.id))
     })
 })

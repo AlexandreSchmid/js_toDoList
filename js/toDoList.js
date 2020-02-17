@@ -1,19 +1,21 @@
 class Todolist {
-    constructor(todo, ul, textValue) {
-        this.todo = todo
+    constructor(elts, ul, textValue) {
+        this.elts = elts
         this.ul = ul
         this.textValue = textValue
     }
 
+    loadTasks() {
+
+    }
+
     createTask() {
         // Create elements for html structure
-        var elt = [
-            document.createElement('li'),
-            document.createElement('p'),
-            document.createElement('button'),
-            document.createTextNode(this.textValue.value)
-        ]
-        this.todo.push(this.textValue.value) // Push into array (see below)
+        var elt = []
+        for (var i = 0; i < this.elts.length; i++) {
+            elt.push(document.createElement(this.elts[i]))
+        }
+        elt.push(document.createTextNode(this.textValue.value))
 
         // Set attributes like class for css
         elt[0].setAttribute('class', 'list-group-item')
@@ -25,17 +27,26 @@ class Todolist {
         elt[0].appendChild(elt[2])
         this.ul.prepend(elt[0])
 
-        localStorage.setItem('todoList', this.todo.join(''))
+        this.saveItems()
+    }
 
+    saveItems() {
+        var tasks = []
+        var items = document.querySelectorAll('li')
+        for (var i = 0; i < items.length; i++) {
+            tasks.push(items[i].firstChild.textContent)
+        }
+        localStorage.setItem('todoList', tasks)
     }
 }
 
 // Triggered by a click on 'Add' button
 document.getElementById('addToDo').addEventListener("click", function() {
     // Call to Todolist class function createTask()
-    new Todolist([], document.getElementById('ul'), document.getElementById('textValue')).createTask()
+    new Todolist(['li', 'p', 'button'], document.getElementById('ul'), document.getElementById('textValue')).createTask()
         // When clicking on remove
     document.querySelector('.badge').addEventListener("click", function() {
-        ul.removeChild(ul.children.item(this.id))
+        document.getElementById('ul').removeChild(document.getElementById('ul').children.item(this.id))
+        new Todolist(null, null, null).saveItems()
     })
 })

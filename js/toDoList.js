@@ -1,7 +1,9 @@
 class Todolist {
-    constructor(elts, ul, textValue) {
-        this.elts = elts
-        this.ul = ul
+
+    elts = ['li', 'p', 'button']
+    ul = document.getElementById('ul')
+
+    constructor(textValue) {
         this.textValue = textValue
     }
 
@@ -34,30 +36,30 @@ class Todolist {
         }
         localStorage.setItem('todoList', tasks)
     }
+
+    removeItem() {
+        document.querySelector('.removeButton').addEventListener("click", function() {
+            this.ul.removeChild(this.ul.children.item(this.id))
+            var items = localStorage.getItem("todoList").split(',')
+            items.pop(items[this.id])
+
+        })
+    }
 }
 
-function removeItem() {
-    document.querySelector('.removeButton').addEventListener("click", function() {
-        document.getElementById('ul').removeChild(document.getElementById('ul').children.item(this.id))
-        var items = localStorage.getItem("todoList").split(',')
-        items.pop(items[this.id])
-    })
-}
-
-window.addEventListener('load', function(e) {
+window.addEventListener('load', function() {
     if (localStorage.getItem('todoList') != "") {
         var items = localStorage.getItem('todoList').split(',')
         for (var i = 0; i < items.length; i++) {
-            new Todolist(['li', 'p', 'button'], document.getElementById('ul'), items[i]).createTask()
+            new Todolist(items[i]).createTask()
         }
     }
-    removeItem()
+    // When clicking on remove
+    new Todolist(null).removeItem()
 })
 
 // Triggered by a click on 'Add' button
 document.getElementById('addToDo').addEventListener("click", function() {
     // Call to Todolist class function createTask()
-    new Todolist(['li', 'p', 'button'], document.getElementById('ul'), document.getElementById('textValue').value).createTask()
-        // When clicking on remove
-    removeItem()
+    new Todolist(document.getElementById('textValue').value).createTask()
 })

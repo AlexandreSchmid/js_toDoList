@@ -14,8 +14,8 @@ class Todolist {
         elt.push(document.createTextNode(this.textValue))
 
         // Set attributes like class for css
-        elt[0].setAttribute('class', 'list-group-item')
-        elt[2].setAttribute('class', 'badge badge-danger')
+        elt[0].setAttribute('class', 'task')
+        elt[2].setAttribute('class', 'removeButton')
         elt[2].innerHTML = 'Remove'
             // Append button into ul child and add all new node to the top of the list
         elt[1].appendChild(elt[3])
@@ -36,13 +36,22 @@ class Todolist {
     }
 }
 
+function removeItem() {
+    document.querySelector('.removeButton').addEventListener("click", function() {
+        document.getElementById('ul').removeChild(document.getElementById('ul').children.item(this.id))
+        var items = localStorage.getItem("todoList").split(',')
+        items.pop(items[this.id])
+    })
+}
+
 window.addEventListener('load', function(e) {
-    if (localStorage.getItem('todoList') != null) {
+    if (localStorage.getItem('todoList') != "") {
         var items = localStorage.getItem('todoList').split(',')
         for (var i = 0; i < items.length; i++) {
             new Todolist(['li', 'p', 'button'], document.getElementById('ul'), items[i]).createTask()
         }
     }
+    removeItem()
 })
 
 // Triggered by a click on 'Add' button
@@ -50,7 +59,5 @@ document.getElementById('addToDo').addEventListener("click", function() {
     // Call to Todolist class function createTask()
     new Todolist(['li', 'p', 'button'], document.getElementById('ul'), document.getElementById('textValue').value).createTask()
         // When clicking on remove
-    document.querySelector('.badge').addEventListener("click", function() {
-        ul.removeChild(ul.children.item(this.id))
-    })
+    removeItem()
 })

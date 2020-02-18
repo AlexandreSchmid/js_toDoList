@@ -6,13 +6,11 @@ body {
 }
 
 .container {
+    margin-left: auto;
+    margin-right: auto;
     width: 50%;
-    padding: 5em;
-    border-radius: 10px;
-}
-
-.form-group {
-    display: inline;
+    padding: 2em;
+    text-align: center;
 }
 
 .header {
@@ -21,14 +19,80 @@ body {
     color: darkblue;
 }
 
-ul .list-group-item {
-    text-align: left;
+.inputTask {
+    width: 100%;
+    padding: 12px 12px;
+    margin: 8px 0;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+    border: 3px solid lightblue;
+    border-radius: 4px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
 }
 
-ul .list-group-item p {
+.inputTask:focus {
+    border: 3px solid lightseagreen;
+    border-radius: 4px;
+}
+
+.addTaskButton {
+    width: 70%;
+    height: 50px;
+    border: none;
+    background-color: lightseagreen;
+    border-radius: 4px;
+    color: white;
+    font-size: 20px;
+    transition: 0.5s;
+}
+
+.addTaskButton:hover {
+    background-color: rgb(26, 141, 135);
+}
+
+.clearButton {
+    width: 29%;
+    height: 50px;
+    border: none;
+    background-color: red;
+    border-radius: 4px;
+    color: white;
+    font-size: 20px;
+    transition: 0.5s;
+}
+
+.clearButton:hover {
+    background-color: rgb(194, 0, 0);
+}
+
+li {
+    background-color: white;
+    padding: 16px 16px;
+    list-style-type: none;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    width: inherit;
+}
+
+ul {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+ul .task p {
     display: inline;
 }
 
-ul .list-group-item button {
+ul .task button {
+    background-color: white;
     float: right;
+    width: 30%;
+    height: 100%;
+    border: none;
+    color: red;
+    font-size: 20px;
 }

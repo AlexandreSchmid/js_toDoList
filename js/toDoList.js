@@ -1,6 +1,4 @@
 class Todolist {
-    // Setting variables for creating elements
-    elts = ['li', 'p', 'button']
     ul = document.getElementById('ul')
         // Setting only the text of each task
     constructor(textValue) {
@@ -8,11 +6,10 @@ class Todolist {
         }
         // Each task is created by putting text into elements created below
     createTask() {
-            // Create elements for html structure
-            var elt = []
-            for (var i = 0; i < this.elts.length; i++) {
-                elt.push(document.createElement(this.elts[i]))
-            }
+            // Setting variables for creating elements
+            let elts = ['li', 'p', 'button']
+                // Create elements for html structure
+            var elt = elts.map(x => document.createElement(x))
             elt.push(document.createTextNode(this.textValue))
 
             // Set attributes like class for css
@@ -42,10 +39,15 @@ class Todolist {
         }
         localStorage.setItem('todoList', tasks)
     }
+
+    clearItems() {
+        this.ul.innerHTML = ''
+        localStorage.removeItem('todoList')
+    }
 }
 
 window.addEventListener('load', function() {
-    if (localStorage.getItem('todoList') != "") {
+    if (localStorage.getItem('todoList')) {
         var items = localStorage.getItem('todoList').split(',')
         for (var i = 0; i < items.length; i++) {
             new Todolist(items[i]).createTask()
@@ -63,7 +65,7 @@ window.addEventListener('load', function() {
             new Todolist(document.getElementById('textValue').value).createTask()
         })
         // Clear every tasks
-    this.document.getElementById('clearToDo').addEventListener("click", function() {
-        localStorage.setItem('todoList', '')
+    document.getElementById('clearToDo').addEventListener("click", function() {
+        new Todolist(null).clearItems()
     })
 })
